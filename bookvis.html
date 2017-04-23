@@ -1,14 +1,13 @@
 <head>
-<script type="text/javascript" src="d3.min.js"></script>
-<script type="text/javascript" src="bookvis.js"></script>
+<script type="text/javascript" src="static/js/d3.min.js"></script>
+<script type="text/javascript" src="static/js/processData.js"></script>
+<script type="text/javascript" src="static/js/bookvis.js"></script>
+<link rel="stylesheet" type="text/css" href="static/css/reset.css">
+<link rel="stylesheet" type="text/css" href="static/css/styling.css">
 </head>
 <body>
-	<div style="width: 80%; float: left">
-		Harry Potter
-		<div id='hp' style="width: 100%"></div>
-		Worm
-		<div id='worm' style="width: 100%"></div>
-		chapters breakdown (4x):
-	</div>
-	<div id="chapterBreakdown" style="width: 20%; right: 0; position: fixed; text-align: center"></div>
+	<h1>Worm on a Bookshelf</h1>
+	<div id='worm' class='flex-container'></div>
+	<h1>Harry Potter on a Bookshelf</h1>
+	<div id='hp' class='flex-container'></div>
 </body>

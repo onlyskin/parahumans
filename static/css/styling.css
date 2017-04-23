@@ -1,0 +1,35 @@
+body {
+	margin: 10px;
+}
+
+h1 {
+	padding: 10px;
+	padding-bottom: 0px;
+	font-size: 30px;
+}
+
+.flex-container {
+	padding: 10px;
+	padding-bottom: 0px;
+	display: flex;
+}
+
+.book {
+	border: 2px solid black;
+	display: flex;
+	align-items: center;
+}
+
+#worm .book {
+	background: linear-gradient(261deg , #4aff81, green 40%, #14410b);
+}
+
+#hp .book {
+	background: linear-gradient(261deg , #7c85f4, #0b10b0 40%, #0b1241);
+}
+
+.title {
+	color: #832222;
+	font-size: 20px;
+	transform-origin: left bottom 0;
+}
