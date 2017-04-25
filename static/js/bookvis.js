@@ -2,7 +2,7 @@
 //width
 var bookBorderWidth = 1;
 
-selectors = ['#worm', '#hp']
+ids = ['worm', 'hp']
 
 series = [worm_data, hp_data]
 
@@ -25,21 +25,36 @@ function getLongestSeries(series) {
 	return Math.max(...seriesLengths)
 }
 
+function getShelfDiv(id) {
+	if (document.querySelector('#' + id) == null) {
+		var shelf = d3.select('body')
+			.append('div')
+				.classed('shelf', true)
+			.attr('id', id);
+		shelf.append('div')
+			.classed('bookspace', true);
+		shelf.append('div')
+			.classed('wood', true);
+	}
+	return d3.select('#' + id);
+}
+
 function drawShelves(series) {
 	var longestSeries = getLongestSeries(series);
 	series.map((s, i) => {
-		let selector = selectors[i];
-		drawShelf(selector, s, longestSeries)
+		let id = ids[i];
+		var shelfDiv = getShelfDiv(id);
+		drawShelf(shelfDiv, s, longestSeries);
 	})
 }
 
 drawShelves(series);
 
-function drawShelf(selector, books, longestSeries) {
+function drawShelf(shelfDiv, books, longestSeries) {
 	var bodyWidth = getBodyWidth();
 	var totalBookBorderWidth = bookBorderWidth * books.length * 2;
 
-	var svgWidth = bodyWidth - totalBookBorderWidth - 10;
+	var svgWidth = bodyWidth - totalBookBorderWidth;
 
 	var height = svgWidth * 0.36;
 
@@ -47,10 +62,10 @@ function drawShelf(selector, books, longestSeries) {
 						.domain([0, longestSeries])
 						.range([0, svgWidth]);
 
-	var container = d3.select(selector);
+	var bookspace = shelfDiv.select('.bookspace');
 
 
-	var books = container.selectAll('.book')
+	var books = bookspace.selectAll('.book')
 				   .data(books);
 
 	// update
@@ -70,10 +85,10 @@ function drawShelf(selector, books, longestSeries) {
 			.attr('class', 'title')
 			.text((d) => d.title);
 
-	console.log(container);
-	var wood = container.append('div')
-		.classed('wood', true)
-		.text('testing title');
+	var wood = shelfDiv.select('.wood')
+		.text('testing title')
+		.style('max-width', bodyWidth + 10)
+		.style('min-width', bodyWidth + 10);
 
 };
 
