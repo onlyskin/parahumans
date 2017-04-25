@@ -8,10 +8,14 @@ h1 {
 	font-size: 30px;
 }
 
-.flex-container {
-	padding: 10px;
-	padding-bottom: 0px;
+.shelf {
 	display: flex;
+	flex-direction: column;
+}
+
+.flex-container {
+	display: flex;
+	border: 1px solid black;
 }
 
 .book {
@@ -20,6 +24,10 @@ h1 {
 	justify-content: center;
 	transform: rotate(1deg);
 	transform-origin: center center 0;
+}
+
+.wood {
+	border: 2px solid black;
 }
 
 #worm .book {

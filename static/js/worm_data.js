@@ -1401,10 +1401,4 @@ worm_data = [
     ],
     "wordCount": 47175
   },
-  {
-    "chapters": [
-      {}
-    ],
-    "wordCount": null
-  }
 ]
