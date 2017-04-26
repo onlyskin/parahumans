@@ -55,13 +55,13 @@ h1 {
 */}
 
 #worm .book {
-	background: linear-gradient(261deg , hsla(126,100%,77%,0.8), hsla(120,100%,25%,0.8), hsla(110,100%,10%,0.92)), url(grilled.png);
-	border: 1px solid #00210c;
+/*	background: linear-gradient(261deg , hsla(126,100%,77%,0.8), hsla(120,100%,25%,0.8), hsla(110,100%,10%,0.92)), url(grilled.png);
+*/	border: 1px solid #00210c;
 }
 
 #hp .book {
-	background: linear-gradient(261deg , hsla(235, 85%, 72%, 0.8), hsla(238, 88%, 37%, 0.8) 40%, hsla(232, 71%, 15%, 0.92)), url(grilled.png);
-	border: 1px solid #000421;
+/*	background: linear-gradient(261deg , hsla(235, 85%, 72%, 0.8), hsla(238, 88%, 37%, 0.8) 40%, hsla(232, 71%, 15%, 0.92)), url(grilled.png);
+*/	border: 1px solid #000421;
 }
 
 .title {

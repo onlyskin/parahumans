@@ -4,6 +4,7 @@ var bookBorderWidth = 1;
 
 ids = ['worm', 'hp']
 titles = ['Worm', 'Harry Potter']
+colourOffsets = [90, 220]
 
 series = [worm_data, hp_data]
 
@@ -48,14 +49,15 @@ function drawShelves(series) {
 	series.map((s, i) => {
 		let id = ids[i];
 		let title = titles[i];
+		let colourOffset = colourOffsets[i];
 		var shelfDiv = getShelfDiv(id, title);
-		drawShelf(shelfDiv, s, longestSeries);
+		drawShelf(shelfDiv, s, longestSeries, colourOffset);
 	})
 }
 
 drawShelves(series);
 
-function drawShelf(shelfDiv, books, longestSeries) {
+function drawShelf(shelfDiv, books, longestSeries, colourOffset) {
 	var bodyWidth = getBodyWidth();
 	var totalBookBorderWidth = bookBorderWidth * books.length * 2;
 
@@ -87,6 +89,11 @@ function drawShelf(shelfDiv, books, longestSeries) {
 			.style('min-width', (d) => widthScale(d.wordCount))
 			.style('max-width', (d) => widthScale(d.wordCount))
 			.attr('title', (d) => Math.round(d.wordCount / 1000).toLocaleString() + 'k words')
+			.style('background', (d) => {
+				var mainSaturation = (Math.round(Math.random() * 15) + 20);
+				var hue = Math.round(Math.random() * 60) + colourOffset;
+				return 'linear-gradient(261deg , hsla(' + hue + ',100%,77%,0.8), hsla(' + hue + ',100%,' + mainSaturation + '%,0.8), hsla(' + hue + ',100%,10%,0.92)), url(static/css/grilled.png)';
+		})
 		.append('div')
 			.attr('class', 'title')
 			.text((d) => d.title);
