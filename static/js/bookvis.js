@@ -3,6 +3,7 @@
 var bookBorderWidth = 1;
 
 ids = ['worm', 'hp']
+titles = ['Worm', 'Harry Potter']
 
 series = [worm_data, hp_data]
 
@@ -25,7 +26,7 @@ function getLongestSeries(series) {
 	return Math.max(...seriesLengths)
 }
 
-function getShelfDiv(id) {
+function getShelfDiv(id, title) {
 	if (document.querySelector('#' + id) == null) {
 		var shelf = d3.select('body')
 			.append('div')
@@ -33,8 +34,11 @@ function getShelfDiv(id) {
 			.attr('id', id);
 		shelf.append('div')
 			.classed('bookspace', true);
-		shelf.append('div')
+		var wood = shelf.append('div')
 			.classed('wood', true);
+		wood.append('div')
+			.classed('shelfTitle', true)
+			.text(title);
 	}
 	return d3.select('#' + id);
 }
@@ -43,7 +47,8 @@ function drawShelves(series) {
 	var longestSeries = getLongestSeries(series);
 	series.map((s, i) => {
 		let id = ids[i];
-		var shelfDiv = getShelfDiv(id);
+		let title = titles[i];
+		var shelfDiv = getShelfDiv(id, title);
 		drawShelf(shelfDiv, s, longestSeries);
 	})
 }
@@ -86,7 +91,6 @@ function drawShelf(shelfDiv, books, longestSeries) {
 			.text((d) => d.title);
 
 	var wood = shelfDiv.select('.wood')
-		.text('testing title')
 		.style('max-width', bodyWidth + 10)
 		.style('min-width', bodyWidth + 10);
 
