@@ -1,5 +1,6 @@
 body {
 	margin: 10px;
+	background: url(confectionary.png);
 }
 
 h1 {
@@ -44,29 +45,21 @@ h1 {
 	color: #57493c;
 	opacity: 0.4;
 	text-shadow: 0px 2px 1px hsla(29, 22%, 89%, 1), -1px -3px 0px black;
-/*	background: -webkit-linear-gradient(transparent, transparent),
-		 		-webkit-linear-gradient(top, rgba(213,173,109,1) 0%,
-		 		rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%,
-		 		rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%,
-		 		rgba(213,173,109,1) 100%);
-	background: -o-linear-gradient(transparent, transparent);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-*/}
+}
 
 #worm .book {
-/*	background: linear-gradient(261deg , hsla(126,100%,77%,0.8), hsla(120,100%,25%,0.8), hsla(110,100%,10%,0.92)), url(grilled.png);
-*/	border: 1px solid #00210c;
+	border: 1px solid #00210c;
 }
 
 #hp .book {
-/*	background: linear-gradient(261deg , hsla(235, 85%, 72%, 0.8), hsla(238, 88%, 37%, 0.8) 40%, hsla(232, 71%, 15%, 0.92)), url(grilled.png);
-*/	border: 1px solid #000421;
+	border: 1px solid #000421;
 }
 
 .title {
-	color: #832222;
-	font-size: 20px;
+	font-family: "Century Gothic", "Helvetica", sans-serif;
+	color: hsla(0, 0%, 0%, 0.2);
+	text-shadow: 1px 1px 1px hsla(29, 22%, 70%, 0.6), -1px -1px 0px hsla(0, 0%, 0%, 0.4);
+	font-size: 16px;
 	text-align: center;
 	transform: rotate(90deg);
 	transform-origin: center center 0;
