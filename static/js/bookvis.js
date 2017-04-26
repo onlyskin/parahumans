@@ -86,6 +86,7 @@ function drawShelf(shelfDiv, books, longestSeries) {
 			.style('height', () => height + 'px')
 			.style('min-width', (d) => widthScale(d.wordCount))
 			.style('max-width', (d) => widthScale(d.wordCount))
+			.attr('title', (d) => Math.round(d.wordCount / 1000).toLocaleString() + 'k words')
 		.append('div')
 			.attr('class', 'title')
 			.text((d) => d.title);
