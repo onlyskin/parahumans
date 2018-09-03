@@ -1,5 +1,3 @@
-const worm_data = require('./worm_data.js');
-const hp_data = require('./hp_data.js');
 const d3 = require('d3');
 
 const BOOK_BORDER_WIDTH = 1;
@@ -8,8 +6,6 @@ const SHELF_HEIGHT = 60;
 ids = ['worm', 'hp']
 titles = ['Worm', 'Harry Potter']
 colourOffsets = [90, 220]
-
-series = [worm_data, hp_data]
 
 function pxToInt(px) {
 	return parseInt(px.replace('px', ''));
@@ -84,22 +80,6 @@ function getShelfDiv(id, title) {
 	return d3.select('#' + id);
 }
 
-function drawShelves(series) {
-	series.map(function(booksFromSeries, index) {
-        const widthScale = d3.scaleLinear()
-            .domain([0, getLongestSeries(series)])
-            .range([0, bookWidth(booksFromSeries)]);
-
-		drawShelf(
-            getShelfDiv(ids[index], titles[index]),
-            booksFromSeries,
-            intToPx(bookHeight(booksFromSeries)),
-            widthScale,
-            colourOffsets[index],
-        );
-	})
-}
-
 function formatWordCount(book) {
     return Math.round(book.wordCount / 1000).toLocaleString() + 'k words';
 }
@@ -141,11 +121,20 @@ function drawShelf(
 		.style('max-width', d => widthScale(d.wordCount));
 };
 
-window.onresize = function() {
-    console.log('resize');
-    drawShelves(series);
-};
+function drawShelves(series) {
+	series.map(function(booksFromSeries, index) {
+        const widthScale = d3.scaleLinear()
+            .domain([0, getLongestSeries(series)])
+            .range([0, bookWidth(booksFromSeries)]);
 
-screen.onorientationchange = function() {console.log('orientation')};
+		drawShelf(
+            getShelfDiv(ids[index], titles[index]),
+            booksFromSeries,
+            intToPx(bookHeight(booksFromSeries)),
+            widthScale,
+            colourOffsets[index],
+        );
+	})
+}
 
-drawShelves(series);
+module.exports = drawShelves;
