@@ -5,6 +5,7 @@
   "author": "Sam Szreter <s.szreter@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "d3": "3"
+    "browserify": "^16.2.2",
+    "d3": "^5.7.0"
   }
 }

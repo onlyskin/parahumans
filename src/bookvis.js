@@ -2,8 +2,6 @@ const worm_data = require('./worm_data.js');
 const hp_data = require('./hp_data.js');
 const d3 = require('d3');
 
-//creates svg elements for each book in collection with correct height and
-//width
 const BOOK_BORDER_WIDTH = 1;
 const SHELF_HEIGHT = '60px';
 
@@ -92,7 +90,7 @@ function getShelfDiv(id, title) {
 
 function drawShelves(series) {
 	series.map(function(booksFromSeries, index) {
-        const widthScale = d3.scale.linear()
+        const widthScale = d3.scaleLinear()
             .domain([0, getLongestSeries(series)])
             .range([0, bookWidth(booksFromSeries)]);
 
@@ -113,7 +111,7 @@ function formatWordCount(book) {
 function randomHueVariant(colourOffset) {
     const saturation = (Math.round(Math.random() * 15) + 20);
     const hue = Math.round(Math.random() * 60) + colourOffset;
-    return `linear-gradient(261deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(static/css/grilled.png)`;
+    return `linear-gradient(261deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(grilled.png)`;
 }
 
 function drawShelf(
@@ -130,21 +128,21 @@ function drawShelf(
         .enter()
         .append('div');
 
-	updating
-		.style('height', bookHeight)
-		.style('min-width', d => widthScale(d.wordCount))
-		.style('max-width', d => widthScale(d.wordCount));
+    const merged = entering
+        .merge(updating);
 
     entering
         .attr('class', 'book')
-		.style('height', bookHeight)
-        .style('min-width', d => widthScale(d.wordCount))
-        .style('max-width', d => widthScale(d.wordCount))
         .attr('title', formatWordCount)
         .style('background', _ => randomHueVariant(colourOffset))
         .append('div')
         .attr('class', 'title')
         .text(d => d.title);
+
+	merged
+		.style('height', bookHeight)
+		.style('min-width', d => widthScale(d.wordCount))
+		.style('max-width', d => widthScale(d.wordCount));
 };
 
 window.onresize = function() {
