@@ -1,4 +1,4 @@
-hp_data = [
+const hp_data = [
  {
    "title": "Philosopher's Stone",
    "wordCount": 76944
@@ -28,3 +28,5 @@ hp_data = [
    "wordCount": 198227
  }
 ]
+
+module.exports = hp_data;

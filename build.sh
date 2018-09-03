@@ -1,0 +1,13 @@
+#!/bin/bash
+
+SRC=src
+OUT=out
+BROWSERIFY=node_modules/browserify/bin/cmd.js
+
+rm -rf $OUT
+mkdir -p $OUT
+
+$BROWSERIFY $SRC/bookvis.js -o $OUT/index.bundle.js
+
+cp index.html $OUT/index.html
+cp css/* $OUT/

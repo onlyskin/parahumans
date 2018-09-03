@@ -1,4 +1,4 @@
-worm_data = [
+const worm_data = [
   {
     "title": "Gestation",
     "chapters": [
@@ -1402,3 +1402,5 @@ worm_data = [
     "wordCount": 47175
   },
 ]
+
+module.exports = worm_data;

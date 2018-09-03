@@ -1,3 +1,7 @@
+const worm_data = require('./worm_data.js');
+const hp_data = require('./hp_data.js');
+const d3 = require('d3');
+
 //creates svg elements for each book in collection with correct height and
 //width
 const BOOK_BORDER_WIDTH = 1;

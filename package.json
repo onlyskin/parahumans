@@ -1,0 +1,10 @@
+{
+  "name": "wormvis",
+  "version": "1.0.0",
+  "repository": "https://github.com/onlyskin/book-vis.git",
+  "author": "Sam Szreter <s.szreter@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "d3": "3"
+  }
+}
