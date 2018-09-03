@@ -1,1 +1,1 @@
-aws s3 sync . s3://www.wormvis.szreter.co.uk --region eu-west-2 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --exclude '.git/*' --exclude upload_to_aws.sh --exclude .DS_Store --exclude '*/.DS_Store' --exclude 'README.md' --exclude '.gitignore'
+aws s3 sync out s3://www.wormvis.szreter.co.uk --region eu-west-2 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
