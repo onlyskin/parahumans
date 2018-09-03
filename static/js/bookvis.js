@@ -40,6 +40,30 @@ function getLongestSeries(series) {
 	return Math.max(...seriesLengths)
 }
 
+function bookHeight(books) {
+	if (window.innerWidth >= 900) {
+		return (getBodyWidth() - bookBorders(books)) * 0.36;
+	} else {
+		return getWindowHeight() - bookBorder();
+	}
+}
+
+function bookWidth(books) {
+	if (window.innerWidth >= 900) {
+		return getBodyWidth() - bookBorders(books);
+	} else {
+		return (getWindowHeight() - bookBorder()) / 0.36;
+	}
+}
+
+function bookBorder() {
+    return BOOK_BORDER_WIDTH * 2;
+}
+
+function bookBorders(books) {
+    return bookBorder() * books.length;
+}
+
 function getShelfDiv(id, title) {
 	if (document.querySelector('#' + id) == null) {
 		const shelf = d3.select('body')
@@ -59,50 +83,36 @@ function getShelfDiv(id, title) {
 }
 
 function drawShelves(series) {
-	const longestSeries = getLongestSeries(series);
-	series.map(function(s, i) {
-		const id = ids[i];
-		const title = titles[i];
-		const colourOffset = colourOffsets[i];
-		const shelfDiv = getShelfDiv(id, title);
-		drawShelf(shelfDiv, s, longestSeries, colourOffset);
+	series.map(function(booksFromSeries, index) {
+        const widthScale = d3.scale.linear()
+            .domain([0, getLongestSeries(series)])
+            .range([0, bookWidth(booksFromSeries)]);
+
+		drawShelf(
+            getShelfDiv(ids[index], titles[index]),
+            booksFromSeries,
+            bookHeight(booksFromSeries),
+            widthScale,
+            colourOffsets[index],
+        );
 	})
 }
 
-drawShelves(series);
-
-function drawShelf(shelfDiv, books, longestSeries, colourOffset) {
-	const totalBookBorderWidth = BOOK_BORDER_WIDTH * books.length * 2;
-    let bodyWidth;
-    let windowHeight;
-    let svgWidth;
-    let svgHeight;
-
-	if (window.innerWidth >= 900) {
-		bodyWidth = getBodyWidth();
-		svgWidth = bodyWidth - totalBookBorderWidth;
-		svgHeight = svgWidth * 0.36;
-	} else {
-		windowHeight = getWindowHeight();
-		svgHeight = windowHeight - BOOK_BORDER_WIDTH * 2;
-		svgWidth = svgHeight / 0.36;
-	}
-
-	console.log(svgWidth);
-
-	const widthScale = d3.scale.linear()
-						.domain([0, longestSeries])
-						.range([0, svgWidth]);
-
-	const bookspace = shelfDiv.select('.bookspace');
-
+function drawShelf(
+    root,
+    books,
+    bookHeight,
+    widthScale,
+    colourOffset,
+) {
+	const bookspace = root.select('.bookspace');
 
 	const updating = bookspace.selectAll('.book')
 				   .data(books);
 
 	// update
 	updating
-		.style('height', function() { return svgHeight + 'px'; })
+		.style('height', function() { return bookHeight + 'px'; })
 		.style('min-width', function(d) { return widthScale(d.wordCount); })
 		.style('max-width', function(d) { return widthScale(d.wordCount); });
 
@@ -110,7 +120,7 @@ function drawShelf(shelfDiv, books, longestSeries, colourOffset) {
 	const booksEnter = updating.enter()
 		.append('div')
 			.attr('class', 'book')
-			.style('height', function() { return svgHeight + 'px'; })
+			.style('height', function() { return bookHeight + 'px'; })
 			.style('min-width', function(d) { return widthScale(d.wordCount); })
 			.style('max-width', function(d) { return widthScale(d.wordCount); })
 			.attr('title', function(d) { return Math.round(d.wordCount / 1000).toLocaleString() + 'k words'; })
@@ -131,3 +141,5 @@ window.onresize = function() {
 };
 
 screen.onorientationchange = function() {console.log('orientation')};
+
+drawShelves(series);
