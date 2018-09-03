@@ -3,7 +3,7 @@ const hp_data = require('./hp_data.js');
 const d3 = require('d3');
 
 const BOOK_BORDER_WIDTH = 1;
-const SHELF_HEIGHT = '60px';
+const SHELF_HEIGHT = 60;
 
 ids = ['worm', 'hp']
 titles = ['Worm', 'Harry Potter']
@@ -19,20 +19,16 @@ function intToPx(number) {
 	return number + 'px';
 }
 
+function getBodyMargin() {
+	return window.getComputedStyle(document.body, null).margin;
+}
+
 function getBodyWidth() {
-	const windowWidth = window.innerWidth;
-	const body = document.querySelector('body');
-	const bodyMargin = window.getComputedStyle(body, null).margin;
-	const bodyWidth = windowWidth - 2 * pxToInt(bodyMargin);
-	return bodyWidth
+	return window.innerWidth - 2 * pxToInt(getBodyMargin());
 }
 
 function getWindowHeight() {
-	const windowHeight = window.innerHeight;
-	const body = document.querySelector('body');
-	const bodyMargin = window.getComputedStyle(body, null).margin;
-	const bodyHeight = windowHeight - pxToInt(SHELF_HEIGHT) - 2 * pxToInt(bodyMargin);
-	return bodyHeight;
+	return window.innerHeight - SHELF_HEIGHT - 2 * pxToInt(getBodyMargin());
 }
 
 function getLongestBook(books) {
@@ -80,7 +76,7 @@ function getShelfDiv(id, title) {
 			.classed('bookspace', true);
 		const wood = shelf.append('div')
 			.classed('wood', true)
-			.style('height', SHELF_HEIGHT);
+			.style('height', intToPx(SHELF_HEIGHT));
 		wood.append('div')
 			.classed('shelfTitle', true)
 			.text(title);
