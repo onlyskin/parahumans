@@ -13,6 +13,10 @@ function pxToInt(px) {
 	return parseInt(px.replace('px', ''));
 }
 
+function intToPx(number) {
+	return number + 'px';
+}
+
 function getBodyWidth() {
 	const windowWidth = window.innerWidth;
 	const body = document.querySelector('body');
@@ -91,11 +95,21 @@ function drawShelves(series) {
 		drawShelf(
             getShelfDiv(ids[index], titles[index]),
             booksFromSeries,
-            bookHeight(booksFromSeries),
+            intToPx(bookHeight(booksFromSeries)),
             widthScale,
             colourOffsets[index],
         );
 	})
+}
+
+function formatWordCount(book) {
+    return Math.round(book.wordCount / 1000).toLocaleString() + 'k words';
+}
+
+function randomHueVariant(colourOffset) {
+    const saturation = (Math.round(Math.random() * 15) + 20);
+    const hue = Math.round(Math.random() * 60) + colourOffset;
+    return `linear-gradient(261deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(static/css/grilled.png)`;
 }
 
 function drawShelf(
@@ -105,39 +119,34 @@ function drawShelf(
     widthScale,
     colourOffset,
 ) {
-	const bookspace = root.select('.bookspace');
+	const updating = root.select('.bookspace').selectAll('.book')
+        .data(books);
 
-	const updating = bookspace.selectAll('.book')
-				   .data(books);
+    const entering = updating
+        .enter()
+        .append('div');
 
-	// update
 	updating
-		.style('height', function() { return bookHeight + 'px'; })
+		.style('height', bookHeight)
 		.style('min-width', function(d) { return widthScale(d.wordCount); })
 		.style('max-width', function(d) { return widthScale(d.wordCount); });
 
-	// enter
-	const booksEnter = updating.enter()
-		.append('div')
-			.attr('class', 'book')
-			.style('height', function() { return bookHeight + 'px'; })
-			.style('min-width', function(d) { return widthScale(d.wordCount); })
-			.style('max-width', function(d) { return widthScale(d.wordCount); })
-			.attr('title', function(d) { return Math.round(d.wordCount / 1000).toLocaleString() + 'k words'; })
-			.style('background', function(d) {
-				const mainSaturation = (Math.round(Math.random() * 15) + 20);
-				const hue = Math.round(Math.random() * 60) + colourOffset;
-				return 'linear-gradient(261deg , hsla(' + hue + ',100%,77%,0.8), hsla(' + hue + ',100%,' + mainSaturation + '%,0.8), hsla(' + hue + ',100%,10%,0.92)), url(static/css/grilled.png)';
-		})
-		.append('div')
-			.attr('class', 'title')
-			.text(function(d) { return d.title; });
+    entering
+        .attr('class', 'book')
+		.style('height', bookHeight)
+        .style('min-width', function(d) { return widthScale(d.wordCount); })
+        .style('max-width', function(d) { return widthScale(d.wordCount); })
+        .attr('title', formatWordCount)
+        .style('background', (d) => randomHueVariant(colourOffset))
+        .append('div')
+        .attr('class', 'title')
+        .text(function(d) { return d.title; });
 
 };
 
 window.onresize = function() {
-	console.log('resize');
-	drawShelves(series);
+    console.log('resize');
+    drawShelves(series);
 };
 
 screen.onorientationchange = function() {console.log('orientation')};
