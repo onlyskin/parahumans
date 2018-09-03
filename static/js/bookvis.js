@@ -128,20 +128,19 @@ function drawShelf(
 
 	updating
 		.style('height', bookHeight)
-		.style('min-width', function(d) { return widthScale(d.wordCount); })
-		.style('max-width', function(d) { return widthScale(d.wordCount); });
+		.style('min-width', d => widthScale(d.wordCount))
+		.style('max-width', d => widthScale(d.wordCount));
 
     entering
         .attr('class', 'book')
 		.style('height', bookHeight)
-        .style('min-width', function(d) { return widthScale(d.wordCount); })
-        .style('max-width', function(d) { return widthScale(d.wordCount); })
+        .style('min-width', d => widthScale(d.wordCount))
+        .style('max-width', d => widthScale(d.wordCount))
         .attr('title', formatWordCount)
-        .style('background', (d) => randomHueVariant(colourOffset))
+        .style('background', _ => randomHueVariant(colourOffset))
         .append('div')
         .attr('class', 'title')
-        .text(function(d) { return d.title; });
-
+        .text(d => d.title);
 };
 
 window.onresize = function() {
