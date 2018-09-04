@@ -1,68 +1,18 @@
 body {
-	margin: 10px;
-	display: inline-block;
-	width: 100%;
-	background: url(confectionary.png);
-}
-
-h1 {
 	padding: 10px;
-	padding-bottom: 0px;
-	font-size: 30px;
-}
-
-.shelf {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.bookspace {
-	display: flex;
-	align-self: flex-start;
+	background: url(confectionary.png);
 }
 
 .book {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transform: rotate(-0.5deg);
-	transform-origin: center center 0;
-}
-
-.wood {
-	background: url(Wood-Texture.jpg);
-	width: 100%;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.shelftitle {
-	font-size: 50px;
-	font-family: "Century Gothic", "Helvetica", sans-serif;
-	font-weight: bold;
-
-	color: #57493c;
-	opacity: 0.4;
-	text-shadow: 0px 2px 1px hsla(29, 22%, 89%, 1), -1px -3px 0px black;
-}
-
-#worm .book {
-	border: 1px solid #00210c;
-}
-
-#hp .book {
-	border: 1px solid #000421;
 }
 
 .title {
 	font-family: "Century Gothic", "Helvetica", sans-serif;
 	color: hsla(0, 0%, 0%, 0.2);
 	text-shadow: 1px 1px 1px hsla(29, 22%, 70%, 0.6), -1px -1px 0px hsla(0, 0%, 0%, 0.4);
-	font-size: 16px;
-	text-align: center;
-	transform: rotate(90deg);
-	transform-origin: center center 0;
+	font-size: 8px;
+  text-align: right;
 }

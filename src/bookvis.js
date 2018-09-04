@@ -1,83 +1,15 @@
 const d3 = require('d3');
 
-const BOOK_BORDER_WIDTH = 1;
-const SHELF_HEIGHT = 60;
+const HEIGHT_TO_WIDTH_PIXEL_RATIO_PER_WORD = (1.9/20.3)/76994;
 
 ids = ['worm', 'hp']
 titles = ['Worm', 'Harry Potter']
 colourOffsets = [90, 220]
 
-function pxToInt(px) {
-	return parseInt(px.replace('px', ''));
-}
-
-function intToPx(number) {
-	return number + 'px';
-}
-
-function getBodyMargin() {
-	return window.getComputedStyle(document.body, null).margin;
-}
-
-function getBodyWidth() {
-	return window.innerWidth - 2 * pxToInt(getBodyMargin());
-}
-
-function getWindowHeight() {
-	return window.innerHeight - SHELF_HEIGHT - 2 * pxToInt(getBodyMargin());
-}
-
-function getLongestBook(books) {
-	return Math.max(...books.map(function(b) {return b.wordCount;}));
-}
-
-function getLongestSeries(series) {
-	const seriesLengths = series.map(function(o) {
-		return o.map(function (p) { return p.wordCount }).reduce(function(a,b) { return a + b });
-	});
-	return Math.max(...seriesLengths)
-}
-
-function bookHeight(books) {
-	if (window.innerWidth >= 900) {
-		return (getBodyWidth() - bookBorders(books)) * 0.36;
-	} else {
-		return getWindowHeight() - bookBorder();
-	}
-}
-
-function bookWidth(books) {
-	if (window.innerWidth >= 900) {
-		return getBodyWidth() - bookBorders(books);
-	} else {
-		return (getWindowHeight() - bookBorder()) / 0.36;
-	}
-}
-
-function bookBorder() {
-    return BOOK_BORDER_WIDTH * 2;
-}
-
-function bookBorders(books) {
-    return bookBorder() * books.length;
-}
-
-function getShelfDiv(id, title) {
-	if (document.querySelector('#' + id) == null) {
-		const shelf = d3.select('body')
-			.append('div')
-				.classed('shelf', true)
-			.attr('id', id);
-		shelf.append('div')
-			.classed('bookspace', true);
-		const wood = shelf.append('div')
-			.classed('wood', true)
-			.style('height', intToPx(SHELF_HEIGHT));
-		wood.append('div')
-			.classed('shelfTitle', true)
-			.text(title);
-	}
-	return d3.select('#' + id);
+function getSeriesLength(books) {
+    return books
+        .map(book => book.wordCount)
+        .reduce((a, b) => a + b);
 }
 
 function formatWordCount(book) {
@@ -87,18 +19,16 @@ function formatWordCount(book) {
 function randomHueVariant(colourOffset) {
     const saturation = (Math.round(Math.random() * 15) + 20);
     const hue = Math.round(Math.random() * 60) + colourOffset;
-    return `linear-gradient(261deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(grilled.png)`;
+    return `linear-gradient(351deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(grilled.png)`;
 }
 
-function drawShelf(
-    root,
-    books,
-    bookHeight,
-    widthScale,
-    colourOffset,
-) {
-	const updating = root.select('.bookspace').selectAll('.book')
-        .data(books);
+function updateShelf(series_data, root) {
+    const heightScale = d3.scaleLinear()
+        .domain([0, 1])
+        .range([0, HEIGHT_TO_WIDTH_PIXEL_RATIO_PER_WORD * root.clientWidth]);
+
+	const updating = d3.select(root).selectAll('.book')
+        .data(series_data.books);
 
     const entering = updating
         .enter()
@@ -110,31 +40,15 @@ function drawShelf(
     entering
         .attr('class', 'book')
         .attr('title', formatWordCount)
-        .style('background', _ => randomHueVariant(colourOffset))
+        .style('background', _ => randomHueVariant(series_data.hue))
         .append('div')
         .attr('class', 'title')
         .text(d => d.title);
 
 	merged
-		.style('height', bookHeight)
-		.style('min-width', d => widthScale(d.wordCount))
-		.style('max-width', d => widthScale(d.wordCount));
-};
-
-function drawShelves(series) {
-	series.map(function(booksFromSeries, index) {
-        const widthScale = d3.scaleLinear()
-            .domain([0, getLongestSeries(series)])
-            .range([0, bookWidth(booksFromSeries)]);
-
-		drawShelf(
-            getShelfDiv(ids[index], titles[index]),
-            booksFromSeries,
-            intToPx(bookHeight(booksFromSeries)),
-            widthScale,
-            colourOffsets[index],
-        );
-	})
+		.style('height', d => heightScale(d.wordCount))
+		.style('min-width', '100%')
+		.style('max-width', '100%');
 }
 
-module.exports = drawShelves;
+module.exports = { updateShelf };

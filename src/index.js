@@ -1,11 +1,13 @@
 const worm_data = require('./worm_data.js');
 const hp_data = require('./hp_data.js');
-const drawShelves = require('./bookvis.js');
+const { updateShelf } = require('./bookvis.js');
 
 const series = [worm_data, hp_data]
 
+const bookshelf = document.getElementById('bookshelf');
+
 window.onresize = function() {
-    drawShelves(series);
+    updateShelf(worm_data, bookshelf, 90);
 };
 
-drawShelves(series);
+updateShelf(worm_data, bookshelf);
