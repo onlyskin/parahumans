@@ -22,6 +22,13 @@ function randomHueVariant(colourOffset) {
     return `linear-gradient(351deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(grilled.png)`;
 }
 
+function randomTranslate() {
+    const maxOffset = 5;
+    const offset = Math.random() * maxOffset * 2 - maxOffset;
+    console.log(offset)
+    return `translateX(${offset}px)`
+}
+
 function updateShelf(series_data, root) {
     const heightScale = d3.scaleLinear()
         .domain([0, 1])
@@ -41,6 +48,7 @@ function updateShelf(series_data, root) {
         .attr('class', 'book')
         .attr('title', formatWordCount)
         .style('background', _ => randomHueVariant(series_data.hue))
+        .style('transform', _ => randomTranslate())
         .append('div')
         .attr('class', 'title')
         .text(d => d.title);

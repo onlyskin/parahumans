@@ -3,6 +3,14 @@ body {
 	background: url(confectionary.png);
 }
 
+#about {
+  padding: 30px 10px;
+  margin: 0px 0px 10px 0px;
+  border-radius: 10px;
+  font-size: 1em;
+  background: white;
+}
+
 .book {
 	display: flex;
 	align-items: center;
