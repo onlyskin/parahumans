@@ -1,5 +1,6 @@
 body {
 	background: url(confectionary.png);
+  scroll-snap-type: mandatory;
 }
 
 #bookshelf {
@@ -8,6 +9,7 @@ body {
 }
 
 .stack-wrapper {
+  scroll-snap-align: start;
   width: 50%;
 }
 

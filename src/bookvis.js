@@ -25,7 +25,6 @@ function randomHueVariant(colourOffset) {
 function randomTranslate() {
     const maxOffset = 5;
     const offset = Math.random() * maxOffset * 2 - maxOffset;
-    console.log(offset)
     return `translateX(${offset}px)`
 }
 
