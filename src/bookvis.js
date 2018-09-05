@@ -48,7 +48,7 @@ function updateShelf(series_data, root) {
         .attr('class', 'book')
         .attr('title', formatWordCount)
         .style('background', _ => randomHueVariant(series_data.hue))
-        // .style('transform', _ => randomTranslate())
+        .style('transform', _ => randomTranslate())
         .append('div')
         .attr('class', 'title')
         .text(d => d.title);
