@@ -9,7 +9,7 @@ body {
 }
 
 .stack-wrapper {
-  scroll-snap-align: start;
+  scroll-snap-align: start none;
   width: 50%;
 }
 
