@@ -48,15 +48,15 @@ function updateShelf(series_data, root) {
         .attr('class', 'book')
         .attr('title', formatWordCount)
         .style('background', _ => randomHueVariant(series_data.hue))
-        .style('transform', _ => randomTranslate())
+        // .style('transform', _ => randomTranslate())
         .append('div')
         .attr('class', 'title')
         .text(d => d.title);
 
 	merged
 		.style('height', d => heightScale(d.wordCount))
-		.style('min-width', '100%')
-		.style('max-width', '100%');
+		.style('min-width', root.clientWidth)
+		.style('max-width', root.clientWidth);
 }
 
 module.exports = { updateShelf };

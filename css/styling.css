@@ -1,11 +1,25 @@
 body {
-	padding: 10px;
 	background: url(confectionary.png);
+}
+
+#bookshelf {
+  width: 200vw;
+  display: flex;
+}
+
+.stack-wrapper {
+  width: 50%;
+}
+
+#parahumans-stack, #harry-potter-stack {
+  display: float;
+  border: 1px solid black;
+  margin: 10px;
 }
 
 #about {
   padding: 30px 10px;
-  margin: 0px 0px 10px 0px;
+  margin: 10px;
   border-radius: 10px;
   font-size: 1em;
   background: white;
