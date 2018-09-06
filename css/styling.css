@@ -1,5 +1,10 @@
 body {
 	background: url(confectionary.png);
+}
+
+#bookshelf-wrapper {
+  width: 100vw;
+  overflow: scroll;
   scroll-snap-type: mandatory;
 }
 
@@ -10,7 +15,7 @@ body {
 
 .stack-wrapper {
   scroll-snap-align: start none;
-  width: 50%;
+  width: 100%;
 }
 
 #parahumans-stack, #harry-potter-stack {
