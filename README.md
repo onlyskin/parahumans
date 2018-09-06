@@ -10,13 +10,13 @@ See the visualisation at: http://parahumans.szreter.co.uk/
 
 #### Build, serve, and watch:
 
-`serveit -s out "./build.sh"` –  (`brew install serveit`)
+`serveit -s out "./build"` –  (`brew install serveit`)
 
 ### Deploying:
 
 #### Build:
 
-`./build.sh`
+`./build`
 
 #### Deploy:
 `./deploy` (requires aws credentials)

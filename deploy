@@ -1,0 +1,3 @@
+aws s3 rm s3://parahumans.szreter.co.uk --region eu-west-2 --recursive
+aws s3 sync out s3://parahumans.szreter.co.uk --region eu-west-2 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --exclude *.js --exclude *.js.map
+aws s3 cp out/index.bundle.js s3://parahumans.szreter.co.uk --region eu-west-2 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
