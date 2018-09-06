@@ -1,6 +1,6 @@
 import { worm_data } from './worm_data';
 import { hp_data } from './hp_data';
-import { updateShelf } from './bookvis';
+import { updateShelf } from './shelf';
 
 const parahumansStack = document.getElementById('parahumans-stack');
 const harryPotterStack = document.getElementById('harry-potter-stack');

@@ -1,4 +1,4 @@
-import { ISeries } from './bookvis';
+import { ISeries } from './types';
 
 export const worm_data: ISeries = {
     hue: 90,

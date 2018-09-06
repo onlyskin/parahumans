@@ -1,4 +1,4 @@
-import { ISeries } from './bookvis';
+import { ISeries } from './types';
 
 export const hp_data: ISeries = {
     hue: 220,

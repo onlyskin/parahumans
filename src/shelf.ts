@@ -1,15 +1,6 @@
-import * as d3 from 'd3';
-
-export interface ISeries {
-    hue: number;
-    books: IBook[];
-}
-
-interface IBook {
-    title: string;
-    wordCount: number;
-    chapters?: any[];
-}
+import { scaleLinear } from 'd3-scale';
+import { select } from 'd3-selection';
+import { IBook, ISeries } from './types';
 
 const HEIGHT_TO_WIDTH_PIXEL_RATIO_PER_WORD = (1.9/20.3)/76994;
 
@@ -30,11 +21,11 @@ function randomTranslate(): string {
 }
 
 function updateShelf(series_data: ISeries, root: Element): void {
-    const heightScale = d3.scaleLinear()
+    const heightScale = scaleLinear()
         .domain([0, 1])
         .range([0, HEIGHT_TO_WIDTH_PIXEL_RATIO_PER_WORD * root.clientWidth]);
 
-	const updating = d3.select(root).selectAll('.book')
+	const updating = select(root).selectAll('.book')
         .data<IBook>(series_data.books);
 
     const entering = updating
