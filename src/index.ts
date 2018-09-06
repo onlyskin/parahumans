@@ -1,6 +1,6 @@
-const worm_data = require('./worm_data.js');
-const hp_data = require('./hp_data.js');
-const { updateShelf } = require('./bookvis.js');
+import { worm_data } from './worm_data';
+import { hp_data } from './hp_data';
+import { updateShelf } from './bookvis';
 
 const parahumansStack = document.getElementById('parahumans-stack');
 const harryPotterStack = document.getElementById('harry-potter-stack');

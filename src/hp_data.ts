@@ -1,4 +1,6 @@
-const hp_data = {
+import { ISeries } from './bookvis';
+
+export const hp_data: ISeries = {
     hue: 220,
     books: [
         {
@@ -31,5 +33,3 @@ const hp_data = {
         }
     ],
 };
-
-module.exports = hp_data;

@@ -1,22 +1,23 @@
-const d3 = require('d3');
+import * as d3 from 'd3';
+
+export interface ISeries {
+    hue: number;
+    books: IBook[];
+}
+
+interface IBook {
+    title: string;
+    wordCount: number;
+    chapters?: any[];
+}
 
 const HEIGHT_TO_WIDTH_PIXEL_RATIO_PER_WORD = (1.9/20.3)/76994;
 
-ids = ['worm', 'hp']
-titles = ['Worm', 'Harry Potter']
-colourOffsets = [90, 220]
-
-function getSeriesLength(books) {
-    return books
-        .map(book => book.wordCount)
-        .reduce((a, b) => a + b);
-}
-
-function formatWordCount(book) {
+function formatWordCount(book: IBook): string {
     return Math.round(book.wordCount / 1000).toLocaleString() + 'k words';
 }
 
-function randomHueVariant(colourOffset) {
+function randomHueVariant(colourOffset: number) {
     const saturation = (Math.round(Math.random() * 15) + 20);
     const hue = Math.round(Math.random() * 60) + colourOffset;
     return `linear-gradient(351deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(grilled.png)`;
@@ -28,7 +29,7 @@ function randomTranslate() {
     return `translateX(${offset}px)`
 }
 
-function updateShelf(series_data, root) {
+function updateShelf(series_data: ISeries, root: Element) {
     const heightScale = d3.scaleLinear()
         .domain([0, 1])
         .range([0, HEIGHT_TO_WIDTH_PIXEL_RATIO_PER_WORD * root.clientWidth]);
@@ -58,4 +59,4 @@ function updateShelf(series_data, root) {
 		.style('max-width', root.clientWidth);
 }
 
-module.exports = { updateShelf };
+export { updateShelf };

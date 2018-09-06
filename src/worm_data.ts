@@ -1,4 +1,6 @@
-const worm_data = {
+import { ISeries } from './bookvis';
+
+export const worm_data: ISeries = {
     hue: 90,
     books: [
         {
@@ -1405,5 +1407,3 @@ const worm_data = {
         },
     ],
 };
-
-module.exports = worm_data;
