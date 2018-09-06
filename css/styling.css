@@ -24,11 +24,15 @@ body {
 }
 
 #about {
-  padding: 30px 10px;
+  padding: 10px;
   margin: 10px;
   border-radius: 10px;
   font-size: 1em;
   background: white;
+}
+
+#about p {
+  margin: 10px 0px;
 }
 
 .book {
