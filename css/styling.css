@@ -48,3 +48,14 @@ body {
 	font-size: 8px;
   text-align: right;
 }
+
+@media (min-width: 1000px) {
+  .stack-wrapper {
+    max-width: 50%;
+  }
+
+  #bookshelf {
+    justify-content: center;
+    width: auto;
+  }
+}
