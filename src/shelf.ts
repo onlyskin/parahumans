@@ -20,7 +20,7 @@ function randomTranslate(): string {
     return `translateX(${offset}px)`
 }
 
-function updateShelf(series_data: ISeries, root: Element): void {
+export function updateShelf(series_data: ISeries, root: Element): void {
     const heightScale = scaleLinear()
         .domain([0, 1])
         .range([0, HEIGHT_TO_WIDTH_PIXEL_RATIO_PER_WORD * root.clientWidth]);
@@ -50,4 +50,10 @@ function updateShelf(series_data: ISeries, root: Element): void {
 		.style('max-width', root.clientWidth);
 }
 
-export { updateShelf };
+export function zeroBookWidths(root: Element) {
+    const books = select(root).selectAll('.book');
+
+    books
+		.style('min-width', '0px')
+		.style('max-width', '0px');
+}
