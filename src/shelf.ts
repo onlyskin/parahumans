@@ -36,7 +36,7 @@ export function updateShelf(series_data: ISeries, root: Element): void {
         .merge(updating);
 
     entering
-        .attr('class', 'book')
+        .attr('class', 'book flex items-center justify-center')
         .attr('title', formatWordCount)
         .style('background', _ => randomHueVariant(series_data.hue))
         .style('transform', _ => randomTranslate())

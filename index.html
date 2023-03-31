@@ -1,24 +1,21 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" type="text/css" href="reset.css">
-	<link rel="stylesheet" type="text/css" href="styling.css">
+	<link rel="stylesheet" type="text/css" href="reset.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+	<link rel="stylesheet" type="text/css" href="styling.css"/>
 </head>
-<body>
-  <div id="about">
-    <p>
-    Scroll down to view the Parahumans series as a stack of books.
-    <p>
-    Scroll right to compare to the Harry Potter series.
-    </p>
-  </div>
-  <div id="bookshelf-wrapper">
-    <div id="bookshelf">
-      <div class="stack-wrapper">
-        <div id="parahumans-stack"></div>
+<body class="bg-near-white flex items-center justify-center">
+  <div style="width: 100vw; overflow: scroll;" id="bookshelf-wrapper">
+    <div style="width: 100vw;" class="flex flex-column flex-row-l">
+      <div class="w-100 w-50-l">
+        <div class="ma2" id="parahumans-stack"></div>
       </div>
-      <div class="stack-wrapper">
-        <div id="harry-potter-stack"></div>
+      <div class="w-100 w-50-l">
+        <div class="ma2" id="twilight-stack"></div>
+      </div>
+      <div class="w-100 w-50-l">
+        <div class="ma2" id="lotr-stack"></div>
       </div>
     </div>
   </div>
