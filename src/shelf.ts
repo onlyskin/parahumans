@@ -11,7 +11,7 @@ function formatWordCount(book: IBook): string {
 function randomHueVariant(colourOffset: number): string {
     const saturation = (Math.round(Math.random() * 15) + 20);
     const hue = Math.round(Math.random() * 60) + colourOffset;
-    return `linear-gradient(351deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(grilled.png)`;
+    return `linear-gradient(351deg, hsla(${hue},100%,77%,0.8), hsla(${hue},100%,${saturation}%,0.8), hsla(${hue},100%,10%,0.92)), url(/assets/grilled.png)`;
 }
 
 function randomTranslate(): string {
